@@ -1,0 +1,175 @@
+Project 1
+
+start
+{
+There are two players<br>   
+<span class="Red"> Player Red </span>starts first<br><span class="Blue"> Player Blue </span> starts next
+ }
+
+{
+<center> <div class ="RedA">[[Roll die for red]]</div></center>
+<div class = "BlueA"><center> [[Roll die for blue]]</center></div>
+}
+
+ {
+(set:  $cardsRemaining to ($playerRed + $playerBlue))
+(set: $blueDie to (random: 1, 6))
+(set: $redDie to (random: 1, 6))
+
+cards taken:  (print: $cardsRemaining) out of at least 52
+<div class="Blue">player blue has: (print: $playerBlue) cards</div><div class="Red">player red has: (print: $playerRed) cards</div>
+}
+
+{
+(if: $cardsRemaining >= 52)[ 
+(if: $playerBlue > $playerRed)[
+Deck of cards is done
+<strong><div class = "Blue">Player Blue wins because he has more cards then player Red</div></strong>
+]
+(elseif: $playerBlue < $playerRed)[
+Deck of cards is done
+<strong><div class = "Blue">Player Blue wins because he has more cards then player Red</div></strong>
+]
+(else: $playerBlue = $playerRed)[
+Deck of cards is done
+It is a tie no body wins 
+]
+]
+}
+
+
+
+
+
+Roll die for red
+
+player red rolled $redDie on the dice
+
+{
+(if: $redDie is 1)[player red takes three cards from the deck<br>
+<strong>one of your cards is Jack</strong><br>
+Player red will  lose all the cards in this turn
+(set: $cardsTakenRed to 0)
+
+]
+(if: $redDie is 2)[player red takes five cards from the deck
+(set: $cardsTakenRed to 5)
+]
+(elseif: $redDie is 3)[player red will lose one card and put it back to the deck
+(set: $cardsTakenRed to -1)
+]
+(elseif: $redDie is 4)[player red takes three cards from the deck
+(set: $cardsTakenRed to 3)
+]
+(elseif: $redDie is 5)[ player red takes three cards from the deck<br>
+<strong>one of your cards is a King</strong><br>
+Player Red will roll again in the next turn
+(set: $cardsTakenRed to 2)
+]
+(elseif: $redDie is 6)[player red will lose two cards and put it back to the deck
+(set: $cardsTakenRed to -2)
+]
+}
+(set: $playerRed= $playerRed + $cardsTakenRed)
+ {
+ (if: $playerRed < 0)[<strong> Player red does not have enough
+ cards, therefore his cards taken will be reset to 0</strong>
+(set: $cardsTakenRed to 0)
+ ]
+}
+{
+ playerRed will add (print: $cardsTakenRed) to his total cards
+}
+ [[Start<-back to the board]]
+
+
+
+
+Roll die for blue
+
+player blue rolled $blueDie on the dice
+
+{
+
+(if: $blueDie is 1)[player blue takes two cards from the deck<br>
+<strong>one of your cards is Jack</strong><br>
+Player blue will  lose all the cards in this turn
+
+(set: $cardsTakenBlue to 0)
+]
+(elseif: $blueDie is 2)[player blue takes three cards from the deck<br>
+<strong>one of your cards is King</strong><br>
+Player blue will roll again in the next turn
+
+(set: $cardsTakenBlue to 2)
+]
+(elseif: $blueDie is 3)[player blue will lose two cards and put it back to the deck
+(set: $cardsTakenBlue to -2)
+]
+(elseif: $blueDie is 4)[player blue takes 5 cards from the deck
+(set: $cardsTakenBlue to 5)
+]
+(elseif: $blueDie is 5)[player blue takes four cards from the deck
+(set: $cardsTakenBlue to 4)
+]
+(elseif: $blueDie is 6)[player blue will lose one cards and put it back to the deck
+(set: $cardsTakenBlue to -1)
+]
+ }
+ (set: $playerBlue= $playerBlue + $cardsTakenBlue)
+ {
+ (if: $playerBlue < 0)[ <strong> Player blue does not have enough cards, therefore his cards taken will be reset to 0 </strong>
+(set: $cardsTakenBlue to 0)
+(set: $playerBlue to 0)
+ ]
+}
+
+{
+ playerBlue  will add  (print: $cardsTakenBlue) to his total cards
+}
+
+  [[Start<-back to the board]]
+ 
+ 
+ Beginning
+ 
+<p id="begin">Project One Game </p>
+<span id="game">[[Start<-StartGame]]<span/><span id="rules">[[GameRules]]</span><span id="about">[[About]]</span>
+
+
+
+GameRules
+
+<span id="r">Game Rules:</span>
+{
+<ul>
+  <li>2 players red player and blue player</li>
+  <li>Player roll  dice and whatever number appear some specific actions will happen  </li>
+  <li>Player pick/drop the amount of cards written on the screen</li>
+  <li>Each numbered card count as one card. Picture cards doesn't count, but all picture cards have some power ups that will have to be used immediately if a player gets it 
+  <ul>
+   <li>Queen: The turn is reversed </li>
+  <li>King: Player go again</li>
+  <li>Ace: Skip the next person's turn</li>
+  <li>Jack: player loose all the cards gained in the turn. </li>
+  <li>Since only two players option is available in this game only King and jack will appear in the deck </li>
+  </ul>
+  </li>
+  <li>The game finishes if at least 52 cards is taken from the deck</li>
+  <li>After all the cards are done the player that has the highest amount  of cards wins</li>
+</ul>  
+}
+[[Beginning <-Back to the main menu]]
+
+About
+<span id="r">About</span>
+{
+<ul>
+  <li>This Game is made using Twine game engine</li>
+  <li>Programing languages used are HTML, CSS and Harlowe 1.2.2 
+by Leon Arnott </li>
+  <li>This game is originally supposed to be a board game, but because of the limitation of twine engine the board was not made and all the dice value and how many cards the player pick is randomly generated </li>
+  <li>The game is developed by Emad Al-Gailani</li>
+</ul>
+}
+[[Beginning <-Back to the main menu]]
